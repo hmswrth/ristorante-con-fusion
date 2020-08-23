@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-   Card, CardImg, CardText, CardBody,
-   CardTitle, CardSubtitle
-} from 'reactstrap';
+import {Card, CardImg, CardText, CardBody,CardTitle, CardSubtitle} from 'reactstrap';
 
 function RenderCard({ item }) {
-
    return (
       <Card>
          <CardImg src={item.image} alt={item.name} />
@@ -16,7 +12,6 @@ function RenderCard({ item }) {
          </CardBody>
       </Card>
    );
-
 }
 
 function Home(props) {

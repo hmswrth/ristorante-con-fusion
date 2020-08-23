@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, CardImg, CardBody, CardText, CardTitle } from 'reactstrap';
 
-
 function RenderComments({ comments }) {
    if (comments == null) {
       return (<div></div>);
