@@ -10,7 +10,7 @@ export const LEADERS = [
    },
    {
      id: 1,
-     name: 'Dhanasekaran Witherspoon',
+     name: 'Danny Witherspoon',
      image: '/assets/images/alberto.png',
      designation: 'Chief Food Officer',
      abbr: 'CFO',
@@ -28,8 +28,8 @@ export const LEADERS = [
    },
    {
      id: 3,
-     name: 'Alberto Somayya',
-     image: '/assets/images/alberto.png',
+     name: 'Alberto Florenci',
+     image: '/assets/images/peterpan.jpg',
      designation: 'Executive Chef',
      abbr: 'EC',
      featured: false,
