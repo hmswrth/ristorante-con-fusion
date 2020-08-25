@@ -2,7 +2,7 @@ export const LEADERS = [
    {
      id: 0,
      name: 'Peter Pan',
-     image: '/assets/images/peterpan.jpg',
+     image: '/assets/images/alberto.png',
      designation: 'Chief Epicurious Officer',
      abbr: 'CEO',
      featured: true,
@@ -29,7 +29,7 @@ export const LEADERS = [
    {
      id: 3,
      name: 'Alberto Florenci',
-     image: '/assets/images/peterpan.jpg',
+     image: '/assets/images/alberto.png',
      designation: 'Executive Chef',
      abbr: 'EC',
      featured: false,
