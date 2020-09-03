@@ -1,35 +1,124 @@
-import React from 'react';
-import { Card, CardImg, CardBody, CardText, CardTitle, BreadcrumbItem, Breadcrumb } from 'reactstrap';
+import React, { Component } from 'react';
+import { Card, CardImg, CardBody, CardText, CardTitle, BreadcrumbItem, Breadcrumb, Button, ModalHeader, ModalBody, Modal, Row, Label, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { LocalForm, modelReducer, Control, Errors } from 'react-redux-form';
+
+const maxLength = (len) => (val) => !(val) || (val.length <= len);
+const minLength = (len) => (val) => (val) && (val.length >= len);
+
+class CommentForm extends Component {
+   constructor(props) {
+      super(props);
+
+      this.state = {
+         isModalOpen: false
+      }
+
+      this.toggleModal = this.toggleModal.bind(this);
+   }
+   render() {
+      return (
+         <div>
+            <Button outline onClick={this.toggleModal} >
+               <span className="fa fa-pencil fa-lg"></span> Submit Comment
+         </Button>
+            <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal} >
+               <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
+               <ModalBody>
+                  <LocalForm>
+                     <Row className="form-group">
+                        <Label htmlFor="rating" md={12}>Rating</Label>
+                        <Col md={12}>
+                           <Control.select model=".ratingtype"
+                              name="ratingType"
+                              className="form-control">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                           </Control.select>
+                        </Col>
+                     </Row>
+                     <Row className="form-group">
+                        <Label htmlFor="authorname" md={12}>Your Name</Label>
+                        <Col md={12}>
+                           <Control.text model=".authorname"
+                              name="authorname"
+                              className="form-control"
+                              placeholder="Your Name"
+                              validators={{
+                                 minLength: minLength(3), maxLength: maxLength(15)
+                              }}></Control.text>
+                        
+                        <Errors className="text-danger"
+                           model=".authorname"
+                           show="touched"
+                           messages={{
+                              minLength: 'Must be greater than 2 characters',
+                              maxLength: 'Must be 15 characters or less'
+                           }}>
+                        </Errors>
+                        </Col>
+                     </Row>
+                     <Row className="form-group">
+                        <Label htmlFor="comment" md={12}>Comment</Label>
+                        <Col md={12}>
+                           <Control.textarea model=".comment"
+                              id="comment"
+                              rows="6"
+                              className="form-control">
+                           </Control.textarea>
+                        </Col>
+                     </Row>
+                     <Button type="submit" color="primary" ml-auto md={2}>Submit</Button>
+                  </LocalForm>
+
+               </ModalBody>
+
+            </Modal>
+         </div>
+
+      );
+   }
+
+   toggleModal() {
+      this.setState({
+         isModalOpen: !this.state.isModalOpen
+      }
+      );
+   };
+}
 
 function RenderComments({ comments }) {
    if (comments != null)
-   return(
-      <div className="col-12 col-md-5 m-1">
-         <h4>Comments</h4>
-         <ul className="list-unstyled">
-            {comments.map((comment) => {
-               return(
-                  <li key={comment.id}>
-            <p>{comment.comment}</p>
-            <p>-- {comment.author},
+      return (
+         <div className="col-12 col-md-5 m-1">
+            <h4>Comments</h4>
+            <ul className="list-unstyled">
+               {comments.map((comment) => {
+                  return (
+                     <li key={comment.id}>
+                        <p>{comment.comment}</p>
+                        <p>-- {comment.author},
                     &nbsp;
                     {new Intl.DateTimeFormat('en-US', {
-               year: 'numeric',
-               month: 'short',
-               day: '2-digit'
-            }).format(new Date(comment.date))}
-            </p>
-         </li>
-               );
-            })}
-         </ul>
-      </div>
-   );
+                           year: 'numeric',
+                           month: 'short',
+                           day: '2-digit'
+                        }).format(new Date(comment.date))}
+                        </p>
+                     </li>
+                  );
+               })}
+            </ul>
+            <CommentForm />
+         </div>
+      );
    else
-   return(
-      <div>Comments Empty</div>
-   );
+      return (
+         <div>Comments Empty</div>
+      );
 }
 
 function RenderDish({ dish }) {
