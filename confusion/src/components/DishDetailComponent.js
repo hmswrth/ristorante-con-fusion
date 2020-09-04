@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardBody, CardText, CardTitle, BreadcrumbItem, Breadcrumb, Button, ModalHeader, ModalBody, Modal, Row, Label, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { LocalForm, modelReducer, Control, Errors } from 'react-redux-form';
+import { LocalForm, Control, Errors } from 'react-redux-form';
 
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => (val) && (val.length >= len);
